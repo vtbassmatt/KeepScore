@@ -13,6 +13,14 @@
 				score: ko.observable(16)
 			}
 		]);
+		
+		self.incrementScore = function(player) {
+			player.score(player.score() + 1);
+		}
+		
+		self.decrementScore = function(player) {
+			player.score(player.score() - 1);
+		}
 	}
 	
 	global.KeepScore = new keepscoreViewModel();

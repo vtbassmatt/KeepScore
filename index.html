@@ -17,14 +17,15 @@
 		
 		<div data-bind="foreach: players">
 			<div class="player">
-				<span class="player-decrement-score">&lArr;</span>
+				<span class="player-decrement-score" data-bind="click: $parent.decrementScore">&lArr;</span>
 				<span class="player-name" data-bind="text: name"></span>
 				<span class="player-score" data-bind="text: score"></span>
-				<span class="player-increment-score">&rArr;</span>
+				<span class="player-increment-score" data-bind="click: $parent.incrementScore">&rArr;</span>
 			</div>
 		</div>
 		
 		<div class="controls">
+			<button id="add-player">Add player</button>
 			<button id="zero-scores">Zero scores</button>
 			<button id="reset-everything">Reset everything</button>
 		</div>
