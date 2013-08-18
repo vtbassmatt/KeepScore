@@ -1,0 +1,20 @@
+/*
+TEALS
+009B95 medium
+1D7471 dark
+006561 darkest
+33CDC7 light
+5CCDC9 lightest
+
+ORANGES
+FF7100 bright
+BF6F30 brown
+A64A00 dark
+FF9540 middle
+FFB173 peach
+*/
+
+body {
+	background-color: #006561;
+	color: #FF7100;
+}

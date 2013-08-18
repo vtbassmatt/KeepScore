@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>KeepScore</title>
+		<!--link rel="shortcut icon" href="docs/images/favicon.ico" type="image/x-icon">
+		<link rel="apple-touch-icon-precomposed" href="docs/images/apple-touch-icon.png"-->
+		<link rel="stylesheet" href="ks.css">
+		<script src="knockout-2.3.0.js"></script>
+		<script src="ks.js"></script>
+	</head>
+
+	<body>
+		<h1>Keep Score</h1>
+		
+		<div data-bind="foreach: players">
+			<div class="player">
+				<span class="player-decrement-score">&lArr;</span>
+				<span class="player-name" data-bind="text: name"></span>
+				<span class="player-score" data-bind="text: score"></span>
+				<span class="player-increment-score">&rArr;</span>
+			</div>
+		</div>
+		
+		<div class="controls">
+			<button id="zero-scores">Zero scores</button>
+			<button id="reset-everything">Reset everything</button>
+		</div>
+		
+		<script>
+			ko.applyBindings(window.KeepScore);
+		</script>
+		
+	</body>
+
+</html>
