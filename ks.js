@@ -42,6 +42,12 @@
 				}
 			}
 		}
+		
+		self.removeEveryone = function() {
+			if(confirm("Really remove everyone?")) {
+				self.players.removeAll();
+			}
+		}
 	}
 	
 	global.KeepScore = new keepscoreViewModel();
