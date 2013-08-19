@@ -1,12 +1,12 @@
 /*
-TEALS
+TEAL
 009B95 medium
 1D7471 dark
 006561 darkest
 33CDC7 light
 5CCDC9 lightest
 
-ORANGES
+ORANGE
 FF7100 bright
 BF6F30 brown
 A64A00 dark
@@ -17,4 +17,27 @@ FFB173 peach
 body {
 	background-color: #006561;
 	color: #FF7100;
+	font-family: "Helvetica Neue", "Helvetica", "Segoe UI", sans-serif;
+}
+
+div.player {
+	font-size: 130%;
+	position: relative;
+	min-width: 300px;
+	max-width: 400px;
+}
+
+div.player:hover {
+	background-color: #1D7471;
+}
+
+div.player .player-increment-score {
+	position: absolute;
+	right: 0;
+}
+
+div.player .player-increment-score:hover,
+div.player .player-decrement-score:hover {
+	background-color: #009B95;
+	color: #FF9540;
 }

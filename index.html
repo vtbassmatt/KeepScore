@@ -18,10 +18,10 @@
 		
 		<div data-bind="foreach: players">
 			<div class="player">
-				<span class="player-decrement-score" data-bind="click: $parent.decrementScore">&lArr;</span>
-				<span class="player-name" data-bind="text: name, event: { dblclick: $parent.editPlayer }"></span>
+				<span class="player-decrement-score" data-bind="click: $parent.decrementScore">&larr;</span>
+				<span class="player-name" data-bind="text: name, event: { dblclick: $parent.editPlayer }"></span>:
 				<span class="player-score" data-bind="text: score"></span>
-				<span class="player-increment-score" data-bind="click: $parent.incrementScore">&rArr;</span>
+				<span class="player-increment-score" data-bind="click: $parent.incrementScore">&rarr;</span>
 			</div>
 		</div>
 		
