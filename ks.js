@@ -31,6 +31,17 @@
 				});
 			}
 		}
+		
+		self.editPlayer = function(player) {
+			var newName = prompt("Change name (or blank to delete):",player.name());
+			if (newName != null && newName != "") {
+				player.name(newName);
+			} else {
+				if(confirm("Really delete player '"+player.name()+"'?")) {
+					self.players.remove(player);
+				}
+			}
+		}
 	}
 	
 	global.KeepScore = new keepscoreViewModel();
