@@ -25,6 +25,10 @@
 			</div>
 		</div>
 		
+		<div data-bind="if: players().length == 0">
+			<span>No players enlisted. Add some below?</span>
+		</div>
+		
 		<div class="controls">
 			<button id="add-player" data-bind="click: addPlayer">Add player</button>
 			<button id="zero-scores" data-bind="click: zeroScores">Zero scores</button>
