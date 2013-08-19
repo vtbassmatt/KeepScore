@@ -77,8 +77,6 @@
 				score: ko.observable(database.players[idx].score)
 			});
 		}
-	}/* else if(!value){
-		$.jStorage.set(STORAGE_KEY,value);
-	}*/
+	}
 
 })(window);
