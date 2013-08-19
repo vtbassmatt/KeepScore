@@ -43,6 +43,14 @@
 			}
 		}
 		
+		self.zeroScores = function() {
+			if(confirm("Really zero scores?")) {
+				for(var idx in self.players()) {
+					self.players()[idx].score(0);
+				}
+			}
+		}
+		
 		self.removeEveryone = function() {
 			if(confirm("Really remove everyone?")) {
 				self.players.removeAll();
