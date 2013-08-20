@@ -28,6 +28,12 @@ body {
 	background-color: #1D7471;
 }
 
+footer {
+	min-width: 300px;
+	max-width: 600px;
+	margin: 8px auto;
+}
+
 button {
 	color: #A64A00;
 	background-color: #FF9540;
@@ -40,6 +46,20 @@ button:hover {
 button:active {
 	color: #FF9540;
 	background-color: #A64A00;
+}
+
+a {
+	color: #FF7100;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+a:active {
+	color: #FF9540;
+}
+a:visited {
+	color: #FF7100;
 }
 
 h1 {
