@@ -88,6 +88,15 @@
 	
 	global.KeepScore = new keepscoreViewModel();
 
+	var ksOnPress = function(event) {
+		if(event.charCode == 13) {
+			// defer pressing the submit key until after Knockout updates
+			// the "promptA" observable
+			setTimeout(function () {
+				document.getElementById("save").click();
+			}, 0);
+		}
+	};
 	var ksPrompt = function(question, defaultText, submit, cancel) {
 		if(global.KeepScore.prompting()) {
 			throw "Cannot raise another prompt while one is open";
@@ -97,6 +106,8 @@
 		global.KeepScore.prompting(true);
 		continuePromptSubmit = submit;
 		continuePromptCancel = cancel;
+		document.getElementById("prompt-answerbox").focus();
+		document.getElementById("prompt-answerbox").addEventListener("keypress", ksOnPress);
 	};
 
 	var value = $.jStorage.get(STORAGE_KEY);
