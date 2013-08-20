@@ -1,11 +1,32 @@
 (function (global) {
 
 	var STORAGE_KEY = "KEEP_SCORE_0000";
-
+	
+	var continuePromptSubmit = null;
+	var continuePromptCancel = null;
+	
 	function keepscoreViewModel() {
 		var self = this;
 		
 		self.players = ko.observableArray([]);
+		
+		self.prompting = ko.observable(false);
+		self.promptQ = ko.observable(null);
+		self.promptA = ko.observable(null);
+		self.promptSubmit = function() {
+			if(continuePromptSubmit) {
+				continuePromptSubmit(self.promptA());
+			}
+			continuePromptSubmit = continuePromptCancel = null;
+			self.prompting(false);
+		}
+		self.promptCancel = function() {
+			if(continuePromptCancel) {
+				continuePromptCancel(self.promptA());
+			}
+			continuePromptSubmit = continuePromptCancel = null;
+			self.prompting(false);
+		}
 		
 		self.incrementScore = function(player) {
 			player.score(player.score() + 1);
@@ -18,14 +39,13 @@
 		}
 		
 		self.addPlayer = function() {
-			var newName = prompt("New player's name:","");
-			if (newName!=null && newName!="") {
+			ksPrompt("New player's name:","", function submit(newName) {
 				self.players.push({
 					name: ko.observable(newName),
 					score: ko.observable(0)
 				});
-			}
-			self.save();
+				self.save();
+			});
 		}
 		
 		self.editPlayer = function(player) {
@@ -66,6 +86,17 @@
 	}
 	
 	global.KeepScore = new keepscoreViewModel();
+
+	var ksPrompt = function(question, defaultText, submit, cancel) {
+		if(global.KeepScore.prompting()) {
+			throw "Cannot raise another prompt while one is open";
+		}
+		global.KeepScore.promptQ(question);
+		global.KeepScore.promptA(defaultText);
+		global.KeepScore.prompting(true);
+		continuePromptSubmit = submit;
+		continuePromptCancel = cancel;
+	};
 
 	var value = $.jStorage.get(STORAGE_KEY);
 	if(value) {

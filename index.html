@@ -36,6 +36,13 @@
 				<button id="zero-scores" data-bind="click: zeroScores">Zero scores</button>
 				<button id="reset-everything" data-bind="click: removeEveryone">Reset everything</button>
 			</div>
+			
+			<div class="prompt" data-bind="if: prompting">
+				<span data-bind="text: promptQ"></span>
+				<input type="text" data-bind="value: promptA"></input>
+				<button id="save" data-bind="click: promptSubmit">Save</button>
+				<button id="cancel" data-bind="click: promptCancel">Cancel</button>
+			</div>
 		</div>
 		
 		<footer><small>A simple score-keeping service provided by <a href="http://burntorangegames.com">Burnt Orange Games</a>. Version 1.0.</small></footer>
