@@ -7,6 +7,7 @@
 		<title>KeepScore</title>
 		<!--link rel="shortcut icon" href="docs/images/favicon.ico" type="image/x-icon">
 		<link rel="apple-touch-icon-precomposed" href="docs/images/apple-touch-icon.png"-->
+		<link rel="stylesheet" href="normalize.css">
 		<link rel="stylesheet" href="ks.css">
 		<script src="knockout-2.3.0.js"></script>
 		<script src="jstorage.min.js"></script>
@@ -14,25 +15,27 @@
 	</head>
 
 	<body>
-		<h1>Keep Score</h1>
+		<div class="container">
+			<h1>Keep Score</h1>
 		
-		<div data-bind="foreach: players">
-			<div class="player">
-				<span class="player-decrement-score" data-bind="click: $parent.decrementScore">&larr;</span>
-				<span class="player-name" data-bind="text: name, event: { dblclick: $parent.editPlayer }"></span>:
-				<span class="player-score" data-bind="text: score"></span>
-				<span class="player-increment-score" data-bind="click: $parent.incrementScore">&rarr;</span>
+			<div data-bind="foreach: players">
+				<div class="player">
+					<button class="player-decrement-score" data-bind="click: $parent.decrementScore">&larr;</button>
+					<button class="player-increment-score" data-bind="click: $parent.incrementScore">&rarr;</button>
+					<span class="player-name" data-bind="text: name, event: { dblclick: $parent.editPlayer }"></span>:
+					<span class="player-score" data-bind="text: score"></span>
+				</div>
 			</div>
-		</div>
 		
-		<div data-bind="if: players().length == 0">
-			<span>No players enlisted. Add some below?</span>
-		</div>
+			<div data-bind="if: players().length == 0">
+				<span>No players enlisted. Add some below?</span>
+			</div>
 		
-		<div class="controls">
-			<button id="add-player" data-bind="click: addPlayer">Add player</button>
-			<button id="zero-scores" data-bind="click: zeroScores">Zero scores</button>
-			<button id="reset-everything" data-bind="click: removeEveryone">Reset everything</button>
+			<div class="controls">
+				<button id="add-player" data-bind="click: addPlayer">Add player</button>
+				<button id="zero-scores" data-bind="click: zeroScores">Zero scores</button>
+				<button id="reset-everything" data-bind="click: removeEveryone">Reset everything</button>
+			</div>
 		</div>
 		
 		<script>

@@ -16,28 +16,51 @@ FFB173 peach
 
 body {
 	background-color: #006561;
-	color: #FF7100;
+	color: #33CDC7;
 	font-family: "Helvetica Neue", "Helvetica", "Segoe UI", sans-serif;
+}
+
+.container {
+	min-width: 300px;
+	max-width: 600px;
+	margin: 8px auto;
+	border: 1px solid #009B95;
+	background-color: #1D7471;
+}
+
+button {
+	color: #A64A00;
+	background-color: #FF9540;
+	border: none;
+	padding: 0.5em;
+}
+button:hover {
+	background-color: #BF6F30;
+}
+button:active {
+	color: #FF9540;
+	background-color: #A64A00;
+}
+
+h1 {
+	background-color: #33CDC7;
+	color: #006561;
+	margin-top: 0;
 }
 
 div.player {
 	font-size: 130%;
-	position: relative;
-	min-width: 300px;
-	max-width: 400px;
+	margin-bottom: 3px;
 }
 
 div.player:hover {
 	background-color: #1D7471;
 }
 
-div.player .player-increment-score {
-	position: absolute;
-	right: 0;
+.player-score {
+	color: #FF7100;
 }
 
-div.player .player-increment-score:hover,
-div.player .player-decrement-score:hover {
-	background-color: #009B95;
-	color: #FF9540;
+.controls {
+	margin-top: 1em;
 }
