@@ -39,7 +39,7 @@
 		}
 		
 		self.addPlayer = function() {
-			ksPrompt("New player's name:","", function submit(newName) {
+			ksPrompt("New player's name:","", function (newName) {
 				self.players.push({
 					name: ko.observable(newName),
 					score: ko.observable(0)
@@ -49,15 +49,16 @@
 		}
 		
 		self.editPlayer = function(player) {
-			var newName = prompt("Change name (or blank to delete):",player.name());
-			if (newName != null && newName != "") {
-				player.name(newName);
-			} else {
-				if(confirm("Really delete player '"+player.name()+"'?")) {
-					self.players.remove(player);
+			ksPrompt("Change name (or blank to delete):",player.name(), function (newName) {
+				if (newName != "") {
+					player.name(newName);
+				} else {
+					if(confirm("Really delete player '"+player.name()+"'?")) {
+						self.players.remove(player);
+					}
 				}
-			}
-			self.save();
+				self.save();
+			});
 		}
 		
 		self.zeroScores = function() {
