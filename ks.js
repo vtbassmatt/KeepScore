@@ -2,10 +2,9 @@
 
 	var STORAGE_KEY = "KEEP_SCORE_0000";
 	
-	function promptViewModel(rootElementSelector) {
+	function promptViewModel() {
 		var self = this;
 		
-		self.rootElementSelector = rootElementSelector;
 		self.continuePromptSubmit = null;
 		self.continuePromptCancel = null;	
 
@@ -39,17 +38,6 @@
 			if(self.prompting()) {
 				throw "Cannot raise another prompt while this one is open";
 			}
-			var root = document.querySelector(self.rootElementSelector);
-			
-			if(!root.getAttribute("data-bind")) {
-				root.setAttribute("data-bind", "if: prompting");
-				root.innerHTML = "<span data-bind=\"text: promptQ\"></span>\n"
-								+ "<input type=\"text\" data-bind=\"hasFocus: answerHasFocus, value: promptA, event: { keypress: onPress }\"></input>"
-								+ "<button data-bind=\"click: promptSubmit\">Save</button>"
-								+ "<button data-bind=\"click: promptCancel\">Cancel</button>";
-				ko.applyBindings(self, root);
-			}
-			
 			self.promptQ(question);
 			self.promptA(defaultText);
 			self.prompting(true);
@@ -63,12 +51,12 @@
 		};
 	}
 	
+	global.Prompt = new promptViewModel();
+
 	function keepscoreViewModel() {
 		var self = this;
 		
 		self.players = ko.observableArray([]);
-		
-		self.prompt = new promptViewModel("#prompt-root");
 		
 		self.incrementScore = function(player) {
 			player.score(player.score() + 1);
@@ -81,7 +69,7 @@
 		}
 		
 		self.addPlayer = function() {
-			self.prompt.prompt("New player's name:","", function (newName) {
+			global.Prompt.prompt("New player's name:","", function (newName) {
 				self.players.push({
 					name: ko.observable(newName),
 					score: ko.observable(0)
@@ -91,7 +79,7 @@
 		}
 		
 		self.editPlayer = function(player) {
-			self.prompt.prompt("Change name (or blank to delete):",player.name(), function (newName) {
+			global.Prompt.prompt("Change name (or blank to delete):",player.name(), function (newName) {
 				if (newName != "") {
 					player.name(newName);
 				} else {

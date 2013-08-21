@@ -16,34 +16,44 @@
 
 	<body>
 		<div class="container">
-			<h1>Keep Score</h1>
+			<div id="main-ui"">
+				<h1>Keep Score</h1>
 		
-			<div data-bind="foreach: players">
-				<div class="player">
-					<button class="player-decrement-score" data-bind="click: $parent.decrementScore">&larr;</button>
-					<button class="player-increment-score" data-bind="click: $parent.incrementScore">&rarr;</button>
-					<span class="player-name" data-bind="text: name, click: $parent.editPlayer"></span>:
-					<span class="player-score" data-bind="text: score"></span>
+				<div data-bind="foreach: players">
+					<div class="player">
+						<button class="player-decrement-score" data-bind="click: $parent.decrementScore">&larr;</button>
+						<button class="player-increment-score" data-bind="click: $parent.incrementScore">&rarr;</button>
+						<span class="player-name" data-bind="text: name, click: $parent.editPlayer"></span>:
+						<span class="player-score" data-bind="text: score"></span>
+					</div>
 				</div>
-			</div>
 		
-			<div data-bind="if: players().length == 0">
-				<span>No players enlisted. Add some below?</span>
-			</div>
+				<div data-bind="if: players().length == 0">
+					<span>No players enlisted. Add some below?</span>
+				</div>
 		
-			<div class="controls">
-				<button id="add-player" data-bind="click: addPlayer">Add player</button>
-				<button id="zero-scores" data-bind="click: zeroScores">Zero scores</button>
-				<button id="reset-everything" data-bind="click: removeEveryone">Reset everything</button>
-			</div>
+				<div class="controls">
+					<button id="add-player" data-bind="click: addPlayer">Add player</button>
+					<button id="zero-scores" data-bind="click: zeroScores">Zero scores</button>
+					<button id="reset-everything" data-bind="click: removeEveryone">Reset everything</button>
+				</div>
 			
-			<div id="prompt-root"></div>
+			</div>
+		
+			<div id="prompt-ui" data-bind="if: prompting">
+				<span data-bind="text: promptQ"></span>
+				<input type="text" data-bind="hasFocus: answerHasFocus, value: promptA, event: { keypress: onPress }"></input>
+				<button data-bind="click: promptSubmit">Save</button>
+				<button data-bind="click: promptCancel">Cancel</button>
+			</div>
+		
+			<footer><small>A simple score-keeping service provided by <a href="http://burntorangegames.com">Burnt Orange Games</a>. Version 1.0.2.</small></footer>
+		
 		</div>
 		
-		<footer><small>A simple score-keeping service provided by <a href="http://burntorangegames.com">Burnt Orange Games</a>. Version 1.0.2.</small></footer>
-		
 		<script>
-			ko.applyBindings(window.KeepScore);
+			ko.applyBindings(window.KeepScore, document.getElementById("main-ui"));
+			ko.applyBindings(window.Prompt, document.getElementById("prompt-ui"));
 		</script>
 		
 	</body>
