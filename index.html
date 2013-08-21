@@ -37,15 +37,10 @@
 				<button id="reset-everything" data-bind="click: removeEveryone">Reset everything</button>
 			</div>
 			
-			<div id="prompt-root" data-bind="if: prompt.prompting">
-				<span data-bind="text: prompt.promptQ"></span>
-				<input id="prompt-answerbox" type="text" data-bind="value: prompt.promptA"></input>
-				<button class="prompt-save-button" data-bind="click: prompt.promptSubmit">Save</button>
-				<button class="prompt-cancel-button" data-bind="click: prompt.promptCancel">Cancel</button>
-			</div>
+			<div id="prompt-root"></div>
 		</div>
 		
-		<footer><small>A simple score-keeping service provided by <a href="http://burntorangegames.com">Burnt Orange Games</a>. Version 1.0.</small></footer>
+		<footer><small>A simple score-keeping service provided by <a href="http://burntorangegames.com">Burnt Orange Games</a>. Version 1.0.2.</small></footer>
 		
 		<script>
 			ko.applyBindings(window.KeepScore);

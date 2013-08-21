@@ -2,30 +2,28 @@
 
 	var STORAGE_KEY = "KEEP_SCORE_0000";
 	
-	var continuePromptSubmit = null;
-	var continuePromptCancel = null;
-	
 	function promptViewModel(rootElementSelector) {
 		var self = this;
 		
 		self.rootElementSelector = rootElementSelector;
+		self.continuePromptSubmit = null;
+		self.continuePromptCancel = null;	
 
 		self.prompting = ko.observable(false);
 		self.promptQ = ko.observable(null);
 		self.promptA = ko.observable(null);
+		self.answerHasFocus = ko.observable(false);
 		self.promptSubmit = function() {
-			if(continuePromptSubmit) {
-				continuePromptSubmit(self.promptA());
+			if(self.continuePromptSubmit) {
+				self.continuePromptSubmit(self.promptA());
 			}
-			continuePromptSubmit = continuePromptCancel = null;
-			self.prompting(false);
+			self.cleanup();
 		}
 		self.promptCancel = function() {
-			if(continuePromptCancel) {
-				continuePromptCancel(self.promptA());
+			if(self.continuePromptCancel) {
+				self.continuePromptCancel(self.promptA());
 			}
-			continuePromptSubmit = continuePromptCancel = null;
-			self.prompting(false);
+			self.cleanup();
 		}
 		self.onPress = function(event) {
 			if(event.charCode == 13) {
@@ -38,16 +36,30 @@
 		};
 		self.prompt = function(question, defaultText, submit, cancel) {
 			if(self.prompting()) {
-				throw "Cannot raise another prompt while one is open";
+				throw "Cannot raise another prompt while this one is open";
 			}
+			var root = document.querySelector(self.rootElementSelector);
+			
+			if(!root.getAttribute("data-bind")) {
+				root.setAttribute("data-bind", "if: prompting");
+				root.innerHTML = "<span data-bind=\"text: promptQ\"></span>\n"
+								+ "<input class=\"prompt-answerbox\" type=\"text\" data-bind=\"hasFocus: answerHasFocus, value: promptA\"></input>"
+								+ "<button class=\"prompt-save-button\" data-bind=\"click: promptSubmit\">Save</button>"
+								+ "<button class=\"prompt-cancel-button\" data-bind=\"click: promptCancel\">Cancel</button>";
+				ko.applyBindings(self, root);
+			}
+			
 			self.promptQ(question);
 			self.promptA(defaultText);
 			self.prompting(true);
-			continuePromptSubmit = submit;
-			continuePromptCancel = cancel;
-			var root = document.querySelector(self.rootElementSelector);
-			root.querySelector("#prompt-answerbox").focus();
-			root.querySelector("#prompt-answerbox").addEventListener("keypress", self.onPress);
+			self.continuePromptSubmit = submit;
+			self.continuePromptCancel = cancel;
+			self.answerHasFocus(true);
+			root.querySelector(".prompt-answerbox").addEventListener("keypress", self.onPress);
+		};
+		self.cleanup = function() {
+			continuePromptSubmit = continuePromptCancel = null;
+			self.prompting(false);
 		};
 	}
 	
