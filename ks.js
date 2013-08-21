@@ -5,8 +5,10 @@
 	var continuePromptSubmit = null;
 	var continuePromptCancel = null;
 	
-	function promptViewModel() {
+	function promptViewModel(rootElementSelector) {
 		var self = this;
+		
+		self.rootElementSelector = rootElementSelector;
 
 		self.prompting = ko.observable(false);
 		self.promptQ = ko.observable(null);
@@ -30,7 +32,7 @@
 				// defer pressing the submit key until after Knockout updates
 				// the "promptA" observable
 				setTimeout(function () {
-					document.getElementById("save").click();
+					document.querySelector(self.rootElementSelector).querySelector("button.prompt-save-button").click();
 				}, 0);
 			}
 		};
@@ -43,8 +45,9 @@
 			self.prompting(true);
 			continuePromptSubmit = submit;
 			continuePromptCancel = cancel;
-			document.getElementById("prompt-answerbox").focus();
-			document.getElementById("prompt-answerbox").addEventListener("keypress", self.onPress);
+			var root = document.querySelector(self.rootElementSelector);
+			root.querySelector("#prompt-answerbox").focus();
+			root.querySelector("#prompt-answerbox").addEventListener("keypress", self.onPress);
 		};
 	}
 	
@@ -53,7 +56,7 @@
 		
 		self.players = ko.observableArray([]);
 		
-		self.prompt = new promptViewModel();
+		self.prompt = new promptViewModel("#prompt-root");
 		
 		self.incrementScore = function(player) {
 			player.score(player.score() + 1);
