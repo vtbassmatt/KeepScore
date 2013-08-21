@@ -25,14 +25,15 @@
 			}
 			self.cleanup();
 		}
-		self.onPress = function(event) {
+		self.onPress = function(data, event) {
 			if(event.charCode == 13) {
-				// defer pressing the submit key until after Knockout updates
-				// the "promptA" observable
+				// defer submitting until after Knockout updates the "promptA" observable
 				setTimeout(function () {
-					document.querySelector(self.rootElementSelector).querySelector("button.prompt-save-button").click();
+					self.promptSubmit();
 				}, 0);
 			}
+			// allow the keypress default action (i.e. add to the text box)
+			return true;
 		};
 		self.prompt = function(question, defaultText, submit, cancel) {
 			if(self.prompting()) {
@@ -43,9 +44,9 @@
 			if(!root.getAttribute("data-bind")) {
 				root.setAttribute("data-bind", "if: prompting");
 				root.innerHTML = "<span data-bind=\"text: promptQ\"></span>\n"
-								+ "<input class=\"prompt-answerbox\" type=\"text\" data-bind=\"hasFocus: answerHasFocus, value: promptA\"></input>"
-								+ "<button class=\"prompt-save-button\" data-bind=\"click: promptSubmit\">Save</button>"
-								+ "<button class=\"prompt-cancel-button\" data-bind=\"click: promptCancel\">Cancel</button>";
+								+ "<input type=\"text\" data-bind=\"hasFocus: answerHasFocus, value: promptA, event: { keypress: onPress }\"></input>"
+								+ "<button data-bind=\"click: promptSubmit\">Save</button>"
+								+ "<button data-bind=\"click: promptCancel\">Cancel</button>";
 				ko.applyBindings(self, root);
 			}
 			
@@ -55,7 +56,6 @@
 			self.continuePromptSubmit = submit;
 			self.continuePromptCancel = cancel;
 			self.answerHasFocus(true);
-			root.querySelector(".prompt-answerbox").addEventListener("keypress", self.onPress);
 		};
 		self.cleanup = function() {
 			continuePromptSubmit = continuePromptCancel = null;
