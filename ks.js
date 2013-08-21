@@ -5,11 +5,9 @@
 	var continuePromptSubmit = null;
 	var continuePromptCancel = null;
 	
-	function keepscoreViewModel() {
+	function promptViewModel() {
 		var self = this;
-		
-		self.players = ko.observableArray([]);
-		
+
 		self.prompting = ko.observable(false);
 		self.promptQ = ko.observable(null);
 		self.promptA = ko.observable(null);
@@ -27,6 +25,35 @@
 			continuePromptSubmit = continuePromptCancel = null;
 			self.prompting(false);
 		}
+		self.onPress = function(event) {
+			if(event.charCode == 13) {
+				// defer pressing the submit key until after Knockout updates
+				// the "promptA" observable
+				setTimeout(function () {
+					document.getElementById("save").click();
+				}, 0);
+			}
+		};
+		self.prompt = function(question, defaultText, submit, cancel) {
+			if(self.prompting()) {
+				throw "Cannot raise another prompt while one is open";
+			}
+			self.promptQ(question);
+			self.promptA(defaultText);
+			self.prompting(true);
+			continuePromptSubmit = submit;
+			continuePromptCancel = cancel;
+			document.getElementById("prompt-answerbox").focus();
+			document.getElementById("prompt-answerbox").addEventListener("keypress", self.onPress);
+		};
+	}
+	
+	function keepscoreViewModel() {
+		var self = this;
+		
+		self.players = ko.observableArray([]);
+		
+		self.prompt = new promptViewModel();
 		
 		self.incrementScore = function(player) {
 			player.score(player.score() + 1);
@@ -39,7 +66,7 @@
 		}
 		
 		self.addPlayer = function() {
-			ksPrompt("New player's name:","", function (newName) {
+			self.prompt.prompt("New player's name:","", function (newName) {
 				self.players.push({
 					name: ko.observable(newName),
 					score: ko.observable(0)
@@ -49,7 +76,7 @@
 		}
 		
 		self.editPlayer = function(player) {
-			ksPrompt("Change name (or blank to delete):",player.name(), function (newName) {
+			self.prompt.prompt("Change name (or blank to delete):",player.name(), function (newName) {
 				if (newName != "") {
 					player.name(newName);
 				} else {
@@ -87,28 +114,6 @@
 	}
 	
 	global.KeepScore = new keepscoreViewModel();
-
-	var ksOnPress = function(event) {
-		if(event.charCode == 13) {
-			// defer pressing the submit key until after Knockout updates
-			// the "promptA" observable
-			setTimeout(function () {
-				document.getElementById("save").click();
-			}, 0);
-		}
-	};
-	var ksPrompt = function(question, defaultText, submit, cancel) {
-		if(global.KeepScore.prompting()) {
-			throw "Cannot raise another prompt while one is open";
-		}
-		global.KeepScore.promptQ(question);
-		global.KeepScore.promptA(defaultText);
-		global.KeepScore.prompting(true);
-		continuePromptSubmit = submit;
-		continuePromptCancel = cancel;
-		document.getElementById("prompt-answerbox").focus();
-		document.getElementById("prompt-answerbox").addEventListener("keypress", ksOnPress);
-	};
 
 	var value = $.jStorage.get(STORAGE_KEY);
 	if(value) {

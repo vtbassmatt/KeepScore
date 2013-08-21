@@ -37,11 +37,11 @@
 				<button id="reset-everything" data-bind="click: removeEveryone">Reset everything</button>
 			</div>
 			
-			<div class="prompt" data-bind="if: prompting">
-				<span data-bind="text: promptQ"></span>
-				<input id="prompt-answerbox" type="text" data-bind="value: promptA"></input>
-				<button id="save" data-bind="click: promptSubmit">Save</button>
-				<button id="cancel" data-bind="click: promptCancel">Cancel</button>
+			<div class="prompt" data-bind="if: prompt.prompting">
+				<span data-bind="text: prompt.promptQ"></span>
+				<input id="prompt-answerbox" type="text" data-bind="value: prompt.promptA"></input>
+				<button id="save" data-bind="click: prompt.promptSubmit">Save</button>
+				<button id="cancel" data-bind="click: prompt.promptCancel">Cancel</button>
 			</div>
 		</div>
 		
