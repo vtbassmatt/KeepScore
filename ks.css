@@ -84,3 +84,23 @@ div.player:hover {
 .controls {
 	margin-top: 1em;
 }
+
+/* prompt styles */
+#prompt-ui {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(255, 255, 255, 0.5);
+}
+#prompt-contents {
+	position: fixed;
+	background-color: #006561;
+	width: 90%;
+	height: 50%;
+	margin: 0 auto;
+	top: 25%;
+	left: 5%;
+	border: 1px solid #33CDC7;
+}

@@ -40,11 +40,14 @@
 			
 			</div>
 		
-			<div id="prompt-ui" data-bind="if: prompting">
-				<span data-bind="text: promptQ"></span>
-				<input type="text" data-bind="hasFocus: answerHasFocus, value: promptA, event: { keypress: onPress }"></input>
-				<button data-bind="click: promptSubmit">Save</button>
-				<button data-bind="click: promptCancel">Cancel</button>
+			<div id="prompt-ui" data-bind="visible: prompting">
+				<div id="prompt-contents">
+					<h1>Keep Score</h1>
+					<span data-bind="text: promptQ"></span>
+					<input type="text" data-bind="hasFocus: answerHasFocus, value: promptA, event: { keypress: onPress }"></input>
+					<button data-bind="click: promptSubmit">Save</button>
+					<button data-bind="click: promptCancel">Cancel</button>
+				</div>
 			</div>
 		
 			<footer><small>A simple score-keeping service provided by <a href="http://burntorangegames.com">Burnt Orange Games</a>. Version 1.0.2.</small></footer>
