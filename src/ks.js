@@ -63,7 +63,13 @@
 			self.save();
 		}
 		
-		self.decrementScore = function(player) {
+		self.decrementScore = function(player,event) {
+			if(event.detail > 1 && event.screenY < -32000)
+			{
+				// workaround for WP8 bug where hitting Enter in the prompt
+				// triggers a phantom double-click of the first player's decrement
+				return;
+			}
 			player.score(player.score() - 1);
 			self.save();
 		}
