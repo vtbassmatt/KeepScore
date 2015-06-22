@@ -23,3 +23,5 @@ Building Keep Score
 On my Mac, I just have to clone the repo and type 'make' in the root directory to get a bin/ folder. Deploy the contents of the bin/ folder to your webhost and then hit it from your browser.
 
 Report any issues on [the project's GitHub page](https://github.com/vtbassmatt/KeepScore).
+
+(ping!)
