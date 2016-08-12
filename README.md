@@ -24,4 +24,3 @@ On my Mac, I just have to clone the repo and type 'make' in the root directory t
 
 Report any issues on [the project's GitHub page](https://github.com/vtbassmatt/KeepScore).
 
-(ping!)
