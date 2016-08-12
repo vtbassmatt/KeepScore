@@ -1,0 +1,4 @@
+- Minify libraries
+- Update to latest libraries
+- Make it less ugly
+- Get version # from package.json instead of hardcoding in index.html
