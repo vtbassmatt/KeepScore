@@ -1,6 +1,8 @@
 KEEP SCORE
 ==========
 
+![Build badge](https://burntorange.visualstudio.com/_apis/public/build/definitions/f562d1dd-26df-4776-af79-45dee72999af/4/badge)
+
 A really simple board game score-keeping app for your phone or desktop.
 
 The App
