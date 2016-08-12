@@ -1,0 +1,26 @@
+{
+  "name": "keepscore",
+  "version": "1.0.6",
+  "description": "A really simple board game score-keeping app for your phone or desktop.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vtbassmatt/KeepScore.git"
+  },
+  "author": "Matt Cooper <vtbassmatt@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vtbassmatt/KeepScore/issues"
+  },
+  "homepage": "https://github.com/vtbassmatt/KeepScore#readme",
+  "devDependencies": {
+    "del": "^2.2.1",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.0.12",
+    "gulp-uglify": "^2.0.0",
+    "pump": "^1.0.1"
+  }
+}

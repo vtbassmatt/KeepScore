@@ -13,14 +13,14 @@ The Tech
 
 Client side: Keep Score uses knockout.js for keeping the UI in sync with the app's state. It uses normalize.css to get a sane worldview for the UI. Finally, it uses jstorage to abstract away differences between client-side storage technologies on various clients.
 
-Build side: jsmin and http://cssminifier.com are used in the build process.
-
-Tested primarily with Safari on Mac and IE10 on Windows Phone 8.
+Build side: Excuse to play with npm and Gulp.
 
 Building Keep Score
 -------------------
 
-On my Mac, I just have to clone the repo and type 'make' in the root directory to get a bin/ folder. Deploy the contents of the bin/ folder to your webhost and then hit it from your browser.
+`npm install && gulp`
+
+Then deploy the contents of the `bin/` folder to your webhost and then hit it from your browser.
 
 Report any issues on [the project's GitHub page](https://github.com/vtbassmatt/KeepScore).
 
