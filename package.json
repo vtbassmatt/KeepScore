@@ -4,7 +4,7 @@
   "description": "A really simple board game score-keeping app for your phone or desktop.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp"
   },
   "repository": {
     "type": "git",
